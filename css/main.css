@@ -1,15 +1,19 @@
 .wrapper {
-    display: grid;
-    /* 4 equal width grid track that grow
-    and shrink according to available space */
-    grid-template-columns: repeat(4, 1fr);
-    /* sizes the grid items that were not
-     explicitly sized by grid-template-rows(implicitly created rows) */
-    grid-auto-rows: 100px;
-    gap: 1em;
+  display: grid;
+  /* 4 equal width grid track */
+  grid-template-columns: repeat(4, 130px);
+  /* sizes the grid items that were not
+       explicitly sized by grid-template-rows(implicitly created rows) */
+  grid-auto-rows: 100px;
+  gap: 1em;
 }
 
 .wrapper .card {
-    background-color: black;
-    color: grey;
+  background-color: black;
+  color: grey;
+}
+
+.bojack {
+  max-width: 100%;
+  max-height: 100%;
 }
