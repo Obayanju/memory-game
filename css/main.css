@@ -1,0 +1,15 @@
+.wrapper {
+    display: grid;
+    /* 4 equal width grid track that grow
+    and shrink according to available space */
+    grid-template-columns: repeat(4, 1fr);
+    /* sizes the grid items that were not
+     explicitly sized by grid-template-rows(implicitly created rows) */
+    grid-auto-rows: 100px;
+    gap: 1em;
+}
+
+.wrapper .card {
+    background-color: black;
+    color: grey;
+}
