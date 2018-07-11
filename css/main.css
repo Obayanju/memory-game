@@ -13,7 +13,9 @@
   color: grey;
 }
 
-.bojack {
-  max-width: 100%;
-  max-height: 100%;
+.slack {
+  max-width: 80%;
+  max-height: 80%;
+  padding-top: 10px;
+  padding-left: 25px;
 }
