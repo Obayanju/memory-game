@@ -23,9 +23,7 @@ function showLogo(card) {
   card.firstElementChild.style.visibility = "visible";
 }
 
-function hideLogo() {
-  const logo = document.querySelector(".slack");
-  // remove black background
-  logo.parentElement.style.backgroundColor = "black";
-  logo.style.visibility = "hidden";
+function hideLogo(card) {
+  card.parentElement.style.backgroundColor = "black";
+  card.style.visibility = "hidden";
 }
