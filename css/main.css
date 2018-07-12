@@ -16,7 +16,6 @@
 .slack {
   max-width: 80%;
   max-height: 80%;
-  padding-top: 10px;
-  padding-left: 25px;
+  padding: 10px 25px;
   visibility: hidden;
 }
