@@ -8,6 +8,9 @@ let card_open = {
 // store currently open guessed cards
 let current_guessed_card = [];
 
+let correct_guesses = 0;
+let num_unique_cards = 2;
+
 function hide_or_showLogo(event) {
   const card = event.target;
   // make sure we are not targetting the parent wrapper div
@@ -77,8 +80,10 @@ function correctGuess(card1, card2) {
     // make sure both the card and its parent div isn't clickable
     preventClick(card1, card2);
     current_guessed_card.splice(0, 2);
-
-    console.log(current_guessed_card);
+    correct_guesses += 1;
+    if (correct_guesses == num_unique_cards){
+      console.log("You have won the game");
+    }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
     preventClick(card1, card2);
