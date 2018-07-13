@@ -35,7 +35,7 @@ function showLogo(card) {
       card_open = 2;
       currently_open.push(card.firstElementChild);
 
-      correctGuess(currently_open[0], currently_open[1]);
+      setTimeout(correctGuess, 400, currently_open[0], currently_open[1]);
     }
   } else {
     card_open = 1;
