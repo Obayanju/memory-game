@@ -10,10 +10,10 @@ let currently_open = [];
 
 function hide_or_showLogo(event) {
   const card = event.target;
-  // make sure we are targetting the card div or the image and not the parent wrapper div
-  if (card.className == "slack" || card.className == "card") {
+  // make sure we are not targetting the parent wrapper div
+  if (card.className != "wrapper") {
     // the div's have their visibility set to "" by default,
-    // we haven't set their visibility explicitly like the images which are explicitly hidden
+    // we haven't set their visibility explicitly like the images which were explicitly hidden
     if (card.style.visibility == "" || card.style.visibility == "hidden") {
       showLogo(event.target);
     } else {
