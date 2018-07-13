@@ -35,7 +35,9 @@ function showLogo(card) {
       card_open = 2;
       current_guessed_card.push(card.firstElementChild);
 
-      setTimeout(correctGuess, 400, current_guessed_card[0], current_guessed_card[1]);
+      correctGuess(current_guessed_card[0], current_guessed_card[1]);
+
+      // setTimeout(correctGuess, 400, current_guessed_card[0], current_guessed_card[1]);
     }
   } else {
     card_open = 1;
@@ -47,6 +49,9 @@ function showLogo(card) {
 function hideLogo(card) {
   card.parentElement.style.backgroundColor = "black";
   card.style.visibility = "hidden";
+
+  // enable card to be clickable after its been closed
+  enableClick(card);
 
   const card_index = current_guessed_card.indexOf(card);
 
@@ -70,19 +75,31 @@ function correctGuess(card1, card2) {
   if (card1.className == card2.className) {
     console.log("you guessed correctly");
     // make sure both the card and its parent div isn't clickable
-    card1.style.pointerEvents = "none";
-    card1.parentElement.style.pointerEvents = "none";
-
-    card2.style.pointerEvents = "none";
-    card2.parentElement.style.pointerEvents = "none";
-
+    preventClick(card1, card2);
     current_guessed_card.splice(0, 2);
 
     console.log(current_guessed_card);
   } else {
-    // console.log("currently open was", current_guessed_card);
-    hideLogo(card1);
-    hideLogo(card2);
+    // prevent wrongly guessed cards to be clickable before any animation
+    preventClick(card1, card2);
+
+    setTimeout(hideLogo, 400, card1);
+    setTimeout(hideLogo, 400, card2);
+    // hideLogo(card1);
+    // hideLogo(card2);
     console.log("you guessed wrong");
   }
+}
+
+function preventClick(card1, card2) {
+  card1.style.pointerEvents = "none";
+  card1.parentElement.style.pointerEvents = "none";
+
+  card2.style.pointerEvents = "none";
+  card2.parentElement.style.pointerEvents = "none";
+}
+
+function enableClick(card) {
+  card.style.pointerEvents = "auto";
+  card.parentElement.style.pointerEvents = "auto";
 }
