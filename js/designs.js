@@ -9,7 +9,8 @@ let card_open = {
 let current_guessed_card = [];
 
 let correct_guesses = 0;
-let num_unique_cards = 2;
+const num_unique_cards = 2;
+let all_cards = document.querySelectorAll(".card");
 
 function hide_or_showLogo(event) {
   const card = event.target;
@@ -81,8 +82,17 @@ function correctGuess(card1, card2) {
     preventClick(card1, card2);
     current_guessed_card.splice(0, 2);
     correct_guesses += 1;
-    if (correct_guesses == num_unique_cards){
+    // the game is won
+    if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
+      alert("You have won the game");
+      all_cards.forEach(function(card, index) {
+        if (index < 4) {
+          console.log(card);
+          hideLogo(card.firstElementChild);
+        }
+      });
+      correct_guesses = 0;
     }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
