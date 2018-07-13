@@ -49,16 +49,28 @@ function hideLogo(card) {
   card.style.visibility = "hidden";
 
   const card_index = currently_open.indexOf(card);
-  currently_open.splice(card_index, 1);
+
+  // making sure that the right card is being deleted in a scenario where
+  // when 3 cards are opened very quickly, with the first pair being a wrong guess,
+  // the third card would be the only item in `currently_open` while `card` might be
+  // the first or second card that was opened
+
+  // this is so 'currently_open' would have 2 items when checking for correct guesses
+  if (currently_open[card_index] == card) {
+    currently_open.splice(card_index, 1);
+  }
 
   card_open -= 1;
   // console.log(card_open);
 }
 
 function correctGuess(card1, card2) {
+  // console.log("-------Timeout function-------");
+  // console.log("hiding logo ", card1, card2);
   if (card1.className == card2.className) {
     console.log("you guessed correctly");
   } else {
+    // console.log("currently open was", currently_open);
     hideLogo(card1);
     hideLogo(card2);
     console.log("you guessed wrong");
