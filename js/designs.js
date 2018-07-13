@@ -58,5 +58,5 @@ function hideLogo(card) {
 function correctGuess(card1, card2) {
   card1.className == card2.className
     ? console.log("you guessed correctly")
-    : console.log("you guessed ");
+    : console.log("you guessed wrong");
 }
