@@ -28,18 +28,18 @@ function showLogo(card) {
   card.style.backgroundColor = "white"; // show the logo
   card.firstElementChild.style.visibility = "visible";
 
-	// store the opened card in an array and increase the 'card_open' counter
+  // store the opened card in an array and increase the 'card_open' counter
   if (currently_open.length != 0) {
     // the number of cards opened can only be 2 if there is already an opened card
     if (currently_open[0].style.visibility == "visible") {
       card_open = 2;
-			currently_open.push(card.firstElementChild);
+      currently_open.push(card.firstElementChild);
 
-			correctGuess(currently_open[0], currently_open[1]);
+      correctGuess(currently_open[0], currently_open[1]);
     }
   } else {
     card_open = 1;
-		currently_open.push(card.firstElementChild);
+    currently_open.push(card.firstElementChild);
   }
   // console.log(card_open);
 }
@@ -49,14 +49,18 @@ function hideLogo(card) {
   card.style.visibility = "hidden";
 
   const card_index = currently_open.indexOf(card);
-	currently_open.splice(card_index, 1);
+  currently_open.splice(card_index, 1);
 
-	card_open -= 1;
+  card_open -= 1;
   // console.log(card_open);
 }
 
 function correctGuess(card1, card2) {
-  card1.className == card2.className
-    ? console.log("you guessed correctly")
-    : console.log("you guessed wrong");
+  if (card1.className == card2.className) {
+    console.log("you guessed correctly");
+  } else {
+    hideLogo(card1);
+    hideLogo(card2);
+    console.log("you guessed wrong");
+  }
 }
