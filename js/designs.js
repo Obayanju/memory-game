@@ -1,5 +1,21 @@
 const num_unique_cards = 2;
-createImageTags();
+// variable to determine how many card has been opened
+let card_open = {
+  value: 0
+};
+// store currently open guessed cards
+let current_guessed_card = [];
+let correct_guesses = 0;
+
+document.addEventListener("DOMContentLoaded", function() {
+  let randomized_img_tags = [];
+  randomized_img_tags = shuffle(createImageTags());
+  addImagesToDiv(randomized_img_tags);
+
+  // select the whole grid
+  const grid_wrapper = document.querySelector(".wrapper");
+  grid_wrapper.addEventListener("click", hide_or_showLogo);
+});
 
 function addImagesToDiv(images) {
   let card_divs = document.querySelectorAll(".card");
@@ -12,7 +28,7 @@ function addImagesToDiv(images) {
 
 function createImageTags() {
   let image_tags = [];
-  let randomized_img_tags = [];
+
   let index = 0;
   const images = ["slack", "zendesk"];
   for (let i = 1; i <= num_unique_cards; i++) {
@@ -35,10 +51,7 @@ function createImageTags() {
     image_tags.push(my_image);
     image_tags.push(my_image_clone);
   }
-
-  randomized_img_tags = shuffle(image_tags);
-  addImagesToDiv(randomized_img_tags);
-  console.log(randomized_img_tags);
+  return image_tags;
 }
 
 function removeImagesFromDiv() {
@@ -68,19 +81,6 @@ function shuffle(array) {
 
   return array;
 }
-
-// select the whole grid
-const grid_wrapper = document.querySelector(".wrapper");
-grid_wrapper.addEventListener("click", hide_or_showLogo);
-// variable to determine how many card has been opened
-let card_open = {
-  value: 0
-};
-// store currently open guessed cards
-let current_guessed_card = [];
-
-let correct_guesses = 0;
-let all_cards = document.querySelectorAll(".card");
 
 function hide_or_showLogo(event) {
   const card = event.target;
@@ -156,6 +156,7 @@ function correctGuess(card1, card2) {
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
       alert("You have won the game");
+      const all_cards = document.querySelectorAll(".card");
       all_cards.forEach(function(card, index) {
         if (index < 4) {
           console.log(card);
@@ -163,7 +164,6 @@ function correctGuess(card1, card2) {
         }
       });
       correct_guesses = 0;
-
     }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
