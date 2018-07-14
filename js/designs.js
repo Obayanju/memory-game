@@ -2,6 +2,7 @@ const num_unique_cards = 2;
 
 function create_image_tags() {
   let image_tags = [];
+  let randomized_img_tags = [];
   let index = 0;
   const images = ["slack", "zendesk"];
   for (let i = 1; i <= num_unique_cards; i++) {
@@ -13,10 +14,34 @@ function create_image_tags() {
     // we have a pair of every image
     image_tags.push(my_image);
     image_tags.push(my_image);
-    console.log(image_tags);
+
   }
+  randomized_img_tags = shuffle(image_tags);
+  console.log(randomized_img_tags);
 }
 create_image_tags();
+
+// Fisher-Yates Shuffle
+function shuffle(array) {
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 // select the whole grid
 const grid_wrapper = document.querySelector(".wrapper");
