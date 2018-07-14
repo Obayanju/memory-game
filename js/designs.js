@@ -1,3 +1,23 @@
+const num_unique_cards = 2;
+
+function create_image_tags() {
+  let image_tags = [];
+  let index = 0;
+  const images = ["slack", "zendesk"];
+  for (let i = 1; i <= num_unique_cards; i++) {
+    let my_image = document.createElement("img");
+    my_image.src = "img/" + images[index] + ".svg";
+    my_image.className = images[index];
+    my_image.alt = images[index] + " logo";
+    index += 1;
+    // we have a pair of every image
+    image_tags.push(my_image);
+    image_tags.push(my_image);
+    console.log(image_tags);
+  }
+}
+create_image_tags();
+
 // select the whole grid
 const grid_wrapper = document.querySelector(".wrapper");
 grid_wrapper.addEventListener("click", hide_or_showLogo);
@@ -9,7 +29,6 @@ let card_open = {
 let current_guessed_card = [];
 
 let correct_guesses = 0;
-const num_unique_cards = 2;
 let all_cards = document.querySelectorAll(".card");
 
 function hide_or_showLogo(event) {
