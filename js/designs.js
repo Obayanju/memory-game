@@ -8,6 +8,7 @@ let current_guessed_card = [];
 let correct_guesses = 0;
 let timer_started = false;
 let seconds_elapsed = 0;
+let intervalID;
 
 document.addEventListener("DOMContentLoaded", function() {
   let randomized_img_tags = [];
@@ -175,6 +176,12 @@ function correctGuess(card1, card2) {
       console.log(response);
       if (response) {
         // restart the game
+
+        // reset timer
+        clearInterval(intervalID);
+        seconds_elapsed = 0;
+        // make sure the timer is restarted
+        timer_started = false;
         const all_cards = document.querySelectorAll(".card");
         all_cards.forEach(function(card, index) {
           if (index < 4) {
@@ -220,7 +227,7 @@ function timer() {
   if (!timer_started) {
     var start = Date.now();
     // check every second, how many seconds has passed
-    setInterval(function() {
+    intervalID = setInterval(function() {
       // how many milliseconds has elapsed since start
       var delta = Date.now() - start;
       // convert to seconds
