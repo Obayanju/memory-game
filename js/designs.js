@@ -1,4 +1,4 @@
-const num_unique_cards = 2;
+const num_unique_cards = 8;
 // variable to determine how many card has been opened
 let card_open = {
   value: 0
@@ -30,7 +30,16 @@ function createImageTags() {
   let image_tags = [];
 
   let index = 0;
-  const images = ["slack", "zendesk"];
+  const images = [
+    "slack",
+    "zendesk",
+    "docker",
+    "intercom",
+    "netflix",
+    "snapchat",
+    "spotify",
+    "twilio"
+  ];
   for (let i = 1; i <= num_unique_cards; i++) {
     let my_image = document.createElement("img");
     // there is two versions of every image
@@ -159,10 +168,8 @@ function correctGuess(card1, card2) {
       // restart the game
       const all_cards = document.querySelectorAll(".card");
       all_cards.forEach(function(card, index) {
-        if (index < 4) {
-          console.log(card);
-          hideLogo(card.firstElementChild);
-        }
+        console.log(card);
+        hideLogo(card.firstElementChild);
       });
       correct_guesses = 0;
       removeImagesFromDiv();
