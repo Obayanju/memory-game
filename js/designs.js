@@ -229,6 +229,7 @@ function timer() {
     var start = Date.now();
     // check every second, how many seconds has passed
     intervalID = setInterval(function() {
+      document.querySelector("#timer").innerHTML = seconds_elapsed;
       // how many milliseconds has elapsed since start
       var delta = Date.now() - start;
       // convert to seconds
