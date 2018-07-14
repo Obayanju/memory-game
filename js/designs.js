@@ -180,7 +180,9 @@ function correctGuess(card1, card2) {
       const message =
         "You have won the game!\nIt took you " +
         seconds_elapsed +
-        " seconds with a rating of __\nPlay Again?";
+        " seconds and " +
+        moves +
+        " moves, with a rating of __\nPlay Again?";
       const response = window.confirm(message);
       console.log(response);
       if (response) {
