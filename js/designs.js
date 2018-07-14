@@ -10,6 +10,7 @@ let timer_started = false;
 let seconds_elapsed = 0;
 let intervalID;
 let moves = 0;
+let stars = 3;
 
 document.addEventListener("DOMContentLoaded", function() {
   let randomized_img_tags = [];
@@ -182,12 +183,15 @@ function correctGuess(card1, card2) {
     // the game is won
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
+      const star_rating = document.querySelector("#stars").innerHTML;
       const message =
         "You have won the game!\nIt took you " +
         seconds_elapsed +
-        " seconds and " +
+        " seconds, " +
         moves +
-        " moves, with a rating of __\nPlay Again?";
+        " moves, and " +
+        stars +
+        " stars\nPlay Again?";
       const response = window.confirm(message);
       console.log(response);
       if (response) {
@@ -256,11 +260,15 @@ function timer() {
 }
 
 function starRating() {
-  if (moves > 7 && moves <= 11) {
+  if (moves == 8) {
     const star = document.querySelector("#star3");
     star.style.visibility = "hidden";
-  } else if (moves > 11) {
+    stars -= 1;
+    console.log(stars, " stars");
+  } else if (moves == 12) {
     const star = document.querySelector("#star2");
     star.style.visibility = "hidden";
+    stars -= 1;
+    console.log(stars, " stars");
   }
 }
