@@ -6,6 +6,7 @@ let card_open = {
 // store currently open guessed cards
 let current_guessed_card = [];
 let correct_guesses = 0;
+let timer_started = false;
 
 document.addEventListener("DOMContentLoaded", function() {
   let randomized_img_tags = [];
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // select the whole grid
   const grid_wrapper = document.querySelector(".wrapper");
   grid_wrapper.addEventListener("click", hide_or_showLogo);
+  grid_wrapper.addEventListener("click", timer);
 });
 
 function addImagesToDiv(images) {
@@ -209,4 +211,18 @@ function preventClick(card1, card2) {
 function enableClick(card) {
   card.style.pointerEvents = "auto";
   card.parentElement.style.pointerEvents = "auto";
+}
+
+function timer() {
+  if (!timer_started) {
+    var start = Date.now();
+    // check every second, how many seconds has passed
+    setInterval(function() {
+      // how many milliseconds has elapsed since start
+      var delta = Date.now() - start;
+      // convert to seconds
+      console.log("seconds elapsed = " + Math.floor(delta / 1000));
+    }, 1000);
+  }
+  timer_started = true;
 }
