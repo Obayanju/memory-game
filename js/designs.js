@@ -1,4 +1,5 @@
 const num_unique_cards = 2;
+createImageTags();
 
 function addImagesToDiv(images) {
   let card_divs = document.querySelectorAll(".card");
@@ -9,7 +10,7 @@ function addImagesToDiv(images) {
   });
 }
 
-function create_image_tags() {
+function createImageTags() {
   let image_tags = [];
   let randomized_img_tags = [];
   let index = 0;
@@ -39,7 +40,6 @@ function create_image_tags() {
   addImagesToDiv(randomized_img_tags);
   console.log(randomized_img_tags);
 }
-create_image_tags();
 
 // Fisher-Yates Shuffle
 function shuffle(array) {
@@ -156,6 +156,7 @@ function correctGuess(card1, card2) {
         }
       });
       correct_guesses = 0;
+
     }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
