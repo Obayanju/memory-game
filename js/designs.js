@@ -227,14 +227,14 @@ function enableClick(card) {
 function timer() {
   if (!timer_started) {
     var start = Date.now();
-    // check every second, how many seconds has passed
+    // check every 10 millisecond, how many seconds has passed
     intervalID = setInterval(function() {
       document.querySelector("#timer").innerHTML = seconds_elapsed;
       // how many milliseconds has elapsed since start
       var delta = Date.now() - start;
       // convert to seconds
       seconds_elapsed = Math.floor(delta / 1000);
-    }, 1000);
+    }, 10);
   }
   timer_started = true;
 }
