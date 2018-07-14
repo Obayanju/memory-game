@@ -138,11 +138,14 @@ function hideLogo(card) {
   card.parentElement.style.backgroundColor = "black";
   card.style.visibility = "hidden";
   // if player open and closes a card, its a move
+  // if player guesses wrongly, it's also a move
   // also, we don't want to increment 'moves' twice for a wrong guess
   if (current_guessed_card.length == 1) {
     moves++;
     document.querySelector("#moves").innerHTML = moves;
   }
+  // check rating after moves is incremented
+  starRating();
   // enable card to be clickable after its been closed
   enableClick(card);
 
@@ -170,6 +173,8 @@ function correctGuess(card1, card2) {
     // if player guesses correctly, its a move
     moves++;
     document.querySelector("#moves").innerHTML = moves;
+    // check rating after moves is incremented
+    starRating();
     // make sure both the card and its parent div isn't clickable
     preventClick(card1, card2);
     current_guessed_card.splice(0, 2);
@@ -250,4 +255,12 @@ function timer() {
   timer_started = true;
 }
 
-function rating() {}
+function starRating() {
+  if (moves > 7 && moves <= 11) {
+    const star = document.querySelector("#star3");
+    star.style.visibility = "hidden";
+  } else if (moves > 11) {
+    const star = document.querySelector("#star2");
+    star.style.visibility = "hidden";
+  }
+}
