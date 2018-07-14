@@ -9,6 +9,7 @@ let correct_guesses = 0;
 let timer_started = false;
 let seconds_elapsed = 0;
 let intervalID;
+let moves = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
   let randomized_img_tags = [];
@@ -136,7 +137,12 @@ function showLogo(card) {
 function hideLogo(card) {
   card.parentElement.style.backgroundColor = "black";
   card.style.visibility = "hidden";
-
+  // if player open and closes a card, its a move
+  // also, we don't want to increment 'moves' twice for a wrong guess
+  if (current_guessed_card.length == 1) {
+    moves++;
+    document.querySelector("#moves").innerHTML = moves;
+  }
   // enable card to be clickable after its been closed
   enableClick(card);
 
@@ -161,6 +167,9 @@ function correctGuess(card1, card2) {
   // console.log("hiding logo ", card1, card2);
   if (card1.className == card2.className) {
     console.log("you guessed correctly");
+    // if player guesses correctly, its a move
+    moves++;
+    document.querySelector("#moves").innerHTML = moves;
     // make sure both the card and its parent div isn't clickable
     preventClick(card1, card2);
     current_guessed_card.splice(0, 2);
@@ -238,3 +247,5 @@ function timer() {
   }
   timer_started = true;
 }
+
+function rating() {}
