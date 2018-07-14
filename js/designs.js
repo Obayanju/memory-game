@@ -196,6 +196,7 @@ function correctGuess(card1, card2) {
         addImagesToDiv(randomized_img_tags);
       } else {
         // user does not want to play again
+        clearInterval(intervalID);
       }
     }
   } else {
