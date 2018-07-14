@@ -156,6 +156,7 @@ function correctGuess(card1, card2) {
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
       alert("You have won the game");
+      // restart the game
       const all_cards = document.querySelectorAll(".card");
       all_cards.forEach(function(card, index) {
         if (index < 4) {
@@ -164,6 +165,10 @@ function correctGuess(card1, card2) {
         }
       });
       correct_guesses = 0;
+      removeImagesFromDiv();
+      let randomized_img_tags = [];
+      randomized_img_tags = shuffle(createImageTags());
+      addImagesToDiv(randomized_img_tags);
     }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
