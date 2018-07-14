@@ -41,6 +41,13 @@ function createImageTags() {
   console.log(randomized_img_tags);
 }
 
+function removeImagesFromDiv() {
+  let card_divs = document.querySelectorAll(".card");
+  card_divs.forEach(function(card) {
+    card.innerHTML = "";
+  });
+}
+
 // Fisher-Yates Shuffle
 function shuffle(array) {
   let currentIndex = array.length;
