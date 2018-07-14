@@ -1,4 +1,4 @@
-const num_unique_cards = 8;
+const num_unique_cards = 2;
 // variable to determine how many card has been opened
 let card_open = {
   value: 0
@@ -164,18 +164,27 @@ function correctGuess(card1, card2) {
     // the game is won
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
-      alert("You have won the game");
-      // restart the game
-      const all_cards = document.querySelectorAll(".card");
-      all_cards.forEach(function(card, index) {
-        console.log(card);
-        hideLogo(card.firstElementChild);
-      });
-      correct_guesses = 0;
-      removeImagesFromDiv();
-      let randomized_img_tags = [];
-      randomized_img_tags = shuffle(createImageTags());
-      addImagesToDiv(randomized_img_tags);
+      const message =
+        "You have won the game!\nIt took you __ seconds with a rating of __\nPlay Again?";
+      const response = window.confirm(message);
+      console.log(response);
+      if (response) {
+        // restart the game
+        const all_cards = document.querySelectorAll(".card");
+        all_cards.forEach(function(card, index) {
+          if (index < 4) {
+            console.log(card);
+            hideLogo(card.firstElementChild);
+          }
+        });
+        correct_guesses = 0;
+        removeImagesFromDiv();
+        let randomized_img_tags = [];
+        randomized_img_tags = shuffle(createImageTags());
+        addImagesToDiv(randomized_img_tags);
+      } else {
+        // user does not want to play again
+      }
     }
   } else {
     // prevent wrongly guessed cards to be clickable before any animation
