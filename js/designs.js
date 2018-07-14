@@ -1,5 +1,14 @@
 const num_unique_cards = 2;
 
+function addImagesToDiv(images) {
+  let card_divs = document.querySelectorAll(".card");
+  card_divs.forEach(function(card, index) {
+    if (images[index] !== undefined) {
+      card.appendChild(images[index]);
+    }
+  });
+}
+
 function create_image_tags() {
   let image_tags = [];
   let randomized_img_tags = [];
@@ -7,16 +16,27 @@ function create_image_tags() {
   const images = ["slack", "zendesk"];
   for (let i = 1; i <= num_unique_cards; i++) {
     let my_image = document.createElement("img");
-    my_image.src = "img/" + images[index] + ".svg";
-    my_image.className = images[index];
-    my_image.alt = images[index] + " logo";
-    index += 1;
-    // we have a pair of every image
-    image_tags.push(my_image);
-    image_tags.push(my_image);
+    // there is two versions of every image
+    let my_image_clone = document.createElement("img");
 
+    my_image.src = "img/" + images[index] + ".svg";
+    my_image_clone.src = "img/" + images[index] + ".svg";
+
+    my_image.className = images[index];
+    my_image_clone.className = images[index];
+
+    my_image.alt = images[index] + " logo";
+    my_image_clone.alt = images[index] + " logo";
+
+    index += 1;
+    // if we push `my_image` twice rather than using `my_image_clone`,
+    // it wouldn't work with `appendChild`
+    image_tags.push(my_image);
+    image_tags.push(my_image_clone);
   }
+
   randomized_img_tags = shuffle(image_tags);
+  addImagesToDiv(randomized_img_tags);
   console.log(randomized_img_tags);
 }
 create_image_tags();
@@ -29,7 +49,6 @@ function shuffle(array) {
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
-
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
