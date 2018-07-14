@@ -7,6 +7,7 @@ let card_open = {
 let current_guessed_card = [];
 let correct_guesses = 0;
 let timer_started = false;
+let seconds_elapsed = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
   let randomized_img_tags = [];
@@ -167,7 +168,9 @@ function correctGuess(card1, card2) {
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
       const message =
-        "You have won the game!\nIt took you __ seconds with a rating of __\nPlay Again?";
+        "You have won the game!\nIt took you " +
+        seconds_elapsed +
+        " seconds with a rating of __\nPlay Again?";
       const response = window.confirm(message);
       console.log(response);
       if (response) {
@@ -221,7 +224,7 @@ function timer() {
       // how many milliseconds has elapsed since start
       var delta = Date.now() - start;
       // convert to seconds
-      console.log("seconds elapsed = " + Math.floor(delta / 1000));
+      seconds_elapsed = Math.floor(delta / 1000);
     }, 1000);
   }
   timer_started = true;
