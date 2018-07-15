@@ -18,7 +18,9 @@ Udacity [style guide](http://udacity.github.io/frontend-nanodegree-styleguide/in
 ![Memory game](img/screenshot.png)
 
 ## Tech/framework used
-Vanilla Javascript
+- Vanilla Javascript
+- HTML
+- CSS
 
 ## Future features
 
