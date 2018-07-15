@@ -7,6 +7,12 @@ body {
   max-width: 570px;
   margin: 50px auto;
 }
+
+.info-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
 .wrapper {
   display: grid;
   /* 4 equal width grid track */
@@ -34,6 +40,15 @@ body {
   visibility: visible;
 }
 
+#restart {
+  width: 30px;
+  grid-column-start: 3;
+}
+
+.num-moves, .stars {
+  grid-column-start: 1;
+}
+
 /* -------- Responsive Design Section ----------- */
 @media screen and (max-width: 330px) {
   .wrapper {
@@ -55,6 +70,9 @@ body {
     visibility: visible;
   }
 
+  #restart {
+    width: 20px;
+  }
   .title {
     font-size: 1em;
   }
@@ -80,6 +98,9 @@ body {
     visibility: visible;
   }
 
+  #restart {
+    width: 20px;
+  }
   .title {
     font-size: 1.5em;
   }

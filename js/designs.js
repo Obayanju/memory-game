@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const grid_wrapper = document.querySelector(".wrapper");
   grid_wrapper.addEventListener("click", hide_or_showLogo);
   // grid_wrapper.addEventListener("click", timer);
+
+  const restart = document.querySelector("#restart");
+  restart.addEventListener("click", restartGame);
 });
 
 function addImagesToDiv(images) {
@@ -184,7 +187,6 @@ function correctGuess(card1, card2) {
     // the game is won
     if (correct_guesses == num_unique_cards) {
       console.log("You have won the game");
-      const star_rating = document.querySelector("#stars").innerHTML;
       const message =
         "You have won the game!\nIt took you " +
         seconds_elapsed +
@@ -196,38 +198,7 @@ function correctGuess(card1, card2) {
       const response = window.confirm(message);
       console.log(response);
       if (response) {
-        // restart the game
-
-        // reset timer
-        clearInterval(intervalID);
-        seconds_elapsed = 0;
-        document.querySelector("#timer").innerHTML = seconds_elapsed;
-        // make sure the timer is restarted
-        timer_started = false;
-
-        // reset number of moves
-        moves = 0;
-        document.querySelector("#moves").innerHTML = 0;
-
-        // reset stars
-        stars = 3;
-        const allStars = document.querySelectorAll(".star");
-        allStars.forEach(function enableVisibility(star) {
-          star.style.visibility = "visible";
-        });
-
-        const all_cards = document.querySelectorAll(".card");
-        all_cards.forEach(function(card, index) {
-          if (index < 4) {
-            console.log(card);
-            hideLogo(card.firstElementChild);
-          }
-        });
-        correct_guesses = 0;
-        removeImagesFromDiv();
-        let randomized_img_tags = [];
-        randomized_img_tags = shuffle(createImageTags());
-        addImagesToDiv(randomized_img_tags);
+        restartGame();
       } else {
         // user does not want to play again
         clearInterval(intervalID);
@@ -243,6 +214,41 @@ function correctGuess(card1, card2) {
     // hideLogo(card2);
     console.log("you guessed wrong");
   }
+}
+
+function restartGame() {
+  // restart the game
+
+  // reset timer
+  clearInterval(intervalID);
+  seconds_elapsed = 0;
+  document.querySelector("#timer").innerHTML = seconds_elapsed;
+  // make sure the timer is restarted
+  timer_started = false;
+
+  // reset number of moves
+  moves = 0;
+  document.querySelector("#moves").innerHTML = 0;
+
+  // reset stars
+  stars = 3;
+  const allStars = document.querySelectorAll(".star");
+  allStars.forEach(function enableVisibility(star) {
+    star.style.visibility = "visible";
+  });
+
+  const all_cards = document.querySelectorAll(".card");
+  all_cards.forEach(function(card, index) {
+    if (index < 4) {
+      console.log(card);
+      hideLogo(card.firstElementChild);
+    }
+  });
+  correct_guesses = 0;
+  removeImagesFromDiv();
+  let randomized_img_tags = [];
+  randomized_img_tags = shuffle(createImageTags());
+  addImagesToDiv(randomized_img_tags);
 }
 
 function preventClick(card1, card2) {
