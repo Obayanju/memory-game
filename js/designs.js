@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // select the whole grid
   const grid_wrapper = document.querySelector(".wrapper");
   grid_wrapper.addEventListener("click", hide_or_showLogo);
-  grid_wrapper.addEventListener("click", timer);
+  // grid_wrapper.addEventListener("click", timer);
 });
 
 function addImagesToDiv(images) {
@@ -98,6 +98,7 @@ function shuffle(array) {
 }
 
 function hide_or_showLogo(event) {
+  timer();
   const card = event.target;
   // make sure we are not targetting the parent wrapper div
   if (card.className != "wrapper") {
@@ -200,6 +201,7 @@ function correctGuess(card1, card2) {
         // reset timer
         clearInterval(intervalID);
         seconds_elapsed = 0;
+        document.querySelector("#timer").innerHTML = seconds_elapsed;
         // make sure the timer is restarted
         timer_started = false;
         const all_cards = document.querySelectorAll(".card");
@@ -255,8 +257,8 @@ function timer() {
       // convert to seconds
       seconds_elapsed = Math.floor(delta / 1000);
     }, 10);
+    timer_started = true;
   }
-  timer_started = true;
 }
 
 function starRating() {
