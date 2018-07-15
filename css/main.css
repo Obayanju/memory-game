@@ -1,9 +1,12 @@
+.container {
+  max-width: 570px;
+}
 .wrapper {
   display: grid;
   /* 4 equal width grid track */
-  grid-template-columns: repeat(4, 130px);
+  grid-template-columns: repeat(4, 1fr);
   /* sizes the grid items that were not
-       explicitly sized by grid-template-rows(implicitly created rows) */
+    explicitly sized by grid-template-rows(implicitly created rows) */
   grid-auto-rows: 100px;
   gap: 1em;
 }
@@ -13,14 +16,57 @@
   color: grey;
 }
 
-.card>img {
-  max-width: 80%;
-  max-height: 80%;
-  padding: 10px 25px;
+.card > img {
+  width: 80%;
+  height: 80%;
+  padding: 0.5em 0.5em;
   visibility: hidden;
 }
 
 .star {
   width: 30px;
   visibility: visible;
+}
+
+/* -------- Responsive Design Section ----------- */
+@media screen and (max-width: 330px) {
+  .wrapper {
+    /* sizes the grid items that were not
+      explicitly sized by grid-template-rows(implicitly created rows) */
+    grid-auto-rows: 1fr;
+    gap: 0.6em;
+  }
+
+  .card > img {
+    width: 80%;
+    height: 80%;
+    padding: 0.5em 0.5em;
+    visibility: hidden;
+  }
+
+  .star {
+    width: 20px;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 331px) and (max-width: 500px) {
+  .wrapper {
+    /* sizes the grid items that were not
+      explicitly sized by grid-template-rows(implicitly created rows) */
+    grid-auto-rows: 1fr;
+    gap: 0.6em;
+  }
+
+  .card > img {
+    width: 80%;
+    height: 80%;
+    padding: 0.5em 0.5em;
+    visibility: hidden;
+  }
+
+  .star {
+    width: 20px;
+    visibility: visible;
+  }
 }
