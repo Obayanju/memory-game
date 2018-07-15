@@ -148,9 +148,9 @@ function hideLogo(card) {
   if (current_guessed_card.length == 1) {
     moves++;
     document.querySelector("#moves").innerHTML = moves;
+    // check rating after moves is incremented
+    starRating();
   }
-  // check rating after moves is incremented
-  starRating();
   // enable card to be clickable after its been closed
   enableClick(card);
 
@@ -239,8 +239,8 @@ function restartGame() {
 
   const all_cards = document.querySelectorAll(".card");
   all_cards.forEach(function(card) {
-      console.log(card);
-      hideLogo(card.firstElementChild);
+    console.log(card);
+    hideLogo(card.firstElementChild);
   });
   correct_guesses = 0;
   removeImagesFromDiv();
