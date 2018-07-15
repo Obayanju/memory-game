@@ -209,6 +209,13 @@ function correctGuess(card1, card2) {
         moves = 0;
         document.querySelector("#moves").innerHTML = 0;
 
+        // reset stars
+        stars = 3;
+        const allStars = document.querySelectorAll(".star");
+        allStars.forEach(function enableVisibility(star) {
+          star.style.visibility = "visible";
+        });
+
         const all_cards = document.querySelectorAll(".card");
         all_cards.forEach(function(card, index) {
           if (index < 4) {
