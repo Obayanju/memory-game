@@ -1,5 +1,11 @@
+html,
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .container {
   max-width: 570px;
+  margin: 50px auto;
 }
 .wrapper {
   display: grid;
@@ -48,6 +54,10 @@
     width: 20px;
     visibility: visible;
   }
+
+  .title {
+    font-size: 1em;
+  }
 }
 
 @media screen and (min-width: 331px) and (max-width: 500px) {
@@ -68,5 +78,9 @@
   .star {
     width: 20px;
     visibility: visible;
+  }
+
+  .title {
+    font-size: 1.5em;
   }
 }
