@@ -204,6 +204,11 @@ function correctGuess(card1, card2) {
         document.querySelector("#timer").innerHTML = seconds_elapsed;
         // make sure the timer is restarted
         timer_started = false;
+
+        // reset number of moves
+        moves = 0;
+        document.querySelector("#moves").innerHTML = 0;
+
         const all_cards = document.querySelectorAll(".card");
         all_cards.forEach(function(card, index) {
           if (index < 4) {
