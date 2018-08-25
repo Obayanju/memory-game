@@ -13,6 +13,7 @@ let moves = 0;
 let stars = 3;
 
 document.addEventListener("DOMContentLoaded", function() {
+  generateCardDivs();
   let randomized_img_tags = [];
   randomized_img_tags = shuffle(createImageTags());
   addImagesToDiv(randomized_img_tags);
@@ -25,6 +26,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const restart = document.querySelector("#restart");
   restart.addEventListener("click", restartGame);
 });
+
+// create the card divs and add them to the wrapper ul
+function generateCardDivs() {
+  for (let i = 1; i <= 16; i++) {
+    let cardDiv = document.createElement("div");
+    cardDiv.classList.add("card");
+    document.querySelector(".wrapper").appendChild(cardDiv);
+  }
+}
 
 function addImagesToDiv(images) {
   let card_divs = document.querySelectorAll(".card");
