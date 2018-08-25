@@ -21,6 +21,8 @@ body {
     explicitly sized by grid-template-rows(implicitly created rows) */
   grid-auto-rows: 100px;
   gap: 1em;
+  /* remove default ul left padding */
+  padding: 0;
 }
 
 .wrapper .card {
@@ -45,7 +47,8 @@ body {
   grid-column-start: 3;
 }
 
-.num-moves, .stars {
+.num-moves,
+.stars {
   grid-column-start: 1;
 }
 
