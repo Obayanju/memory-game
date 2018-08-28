@@ -1,3 +1,14 @@
+class Card {
+  constructor(identity) {
+    this.identity = identity;
+  }
+
+  setImage() {}
+  showCard() {}
+  hideCard() {}
+  flipCard() {}
+}
+
 const num_unique_cards = 8;
 // variable to determine how many card has been opened
 let card_open = {
