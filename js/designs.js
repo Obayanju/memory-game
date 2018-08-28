@@ -146,7 +146,6 @@ function showLogo(card) {
     card_open = 1;
     current_guessed_card.push(card.firstElementChild);
   }
-  // console.log(card_open);
 }
 
 function hideLogo(card) {
@@ -155,7 +154,7 @@ function hideLogo(card) {
   // if player open and closes a card, its a move
   // if player guesses wrongly, it's also a move
   // also, we don't want to increment 'moves' twice for a wrong guess
-  if (current_guessed_card.length == 1) {
+  if (current_guessed_card.length == 2) {
     moves++;
     document.querySelector("#moves").innerHTML = moves;
     // check rating after moves is incremented
@@ -249,7 +248,6 @@ function restartGame() {
 
   const all_cards = document.querySelectorAll(".card");
   all_cards.forEach(function(card) {
-    console.log(card);
     hideLogo(card.firstElementChild);
   });
   correct_guesses = 0;
