@@ -44,7 +44,7 @@ class Card {
   constructor(identity) {
     this.identity = identity;
   }
-
+  /*** add a div, with an img as a child, into the DOM */
   setImage() {
     // create the div for the img tag
     let cardDiv = document.createElement("div");
