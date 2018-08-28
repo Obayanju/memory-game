@@ -60,7 +60,13 @@ class Card {
   hide() {}
   flip() {}
 }
+let images = new Images();
+images.shuffle();
 
+for (let i = 0; i < 16; i++) {
+  let card = new Card(images.imagesArray[i]);
+  card.setImage();
+}
 // const num_unique_cards = 8;
 // // variable to determine how many card has been opened
 // let card_open = {
