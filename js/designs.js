@@ -1,3 +1,45 @@
+class Images {
+  constructor() {
+    this.imagesArray = [
+      "slack",
+      "zendesk",
+      "docker",
+      "intercom",
+      "netflix",
+      "snapchat",
+      "spotify",
+      "twilio",
+      "slack",
+      "zendesk",
+      "docker",
+      "intercom",
+      "netflix",
+      "snapchat",
+      "spotify",
+      "twilio"
+    ];
+  }
+
+  shuffle() {
+    // Fisher-Yates Shuffle
+    let currentIndex = this.imagesArray.length;
+    let temporaryValue;
+    let randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = this.imagesArray[currentIndex];
+      this.imagesArray[currentIndex] = this.imagesArray[randomIndex];
+      this.imagesArray[randomIndex] = temporaryValue;
+    }
+  }
+}
+
 class Card {
   constructor(identity) {
     this.identity = identity;
