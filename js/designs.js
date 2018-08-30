@@ -43,6 +43,7 @@ class Images {
 class Card {
   constructor(identity) {
     this.identity = identity;
+    document.addEventListener("click", this.hideOrShow);
   }
   /*** add a div, with an img as a child, into the DOM */
   setImage() {
@@ -56,8 +57,14 @@ class Card {
 
     cardDiv.appendChild(myImage);
   }
+
   show() {}
   hide() {}
+
+  hideOrShow() {
+    console.log("hide or show card");
+  }
+
   flip() {}
 }
 let images = new Images();
