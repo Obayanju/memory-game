@@ -43,8 +43,13 @@ class Images {
 class Card {
   constructor(identity) {
     this.identity = identity;
-    document.addEventListener("click", this.hideOrShow);
   }
+
+  addClickListener() {
+    // const card = document.querySelector("");
+    // card.addEventListener("click", this.hideOrShow);
+  }
+
   /*** add a div, with an img as a child, into the DOM */
   setImage() {
     // create the div for the img tag
@@ -73,7 +78,9 @@ images.shuffle();
 for (let i = 0; i < 16; i++) {
   let card = new Card(images.imagesArray[i]);
   card.setImage();
+  // card.addClickListener();
 }
+
 // const num_unique_cards = 8;
 // // variable to determine how many card has been opened
 // let card_open = {
