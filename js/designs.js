@@ -46,8 +46,8 @@ class Card {
   }
 
   addClickListener() {
-    // const card = document.querySelector("");
-    // card.addEventListener("click", this.hideOrShow);
+    const cardWrapper = document.querySelector(".wrapper");
+    cardWrapper.addEventListener("click", this.hideOrShow);
   }
 
   /*** add a div, with an img as a child, into the DOM */
@@ -67,7 +67,10 @@ class Card {
   hide() {}
 
   hideOrShow() {
-    console.log("hide or show card");
+    // only respond to click on the card DIV itself
+    if (event.target.nodeName != "UL") {
+      console.log("hide or show card");
+    }
   }
 
   flip() {}
@@ -75,11 +78,13 @@ class Card {
 let images = new Images();
 images.shuffle();
 
+let card;
 for (let i = 0; i < 16; i++) {
-  let card = new Card(images.imagesArray[i]);
+  card = new Card(images.imagesArray[i]);
   card.setImage();
-  // card.addClickListener();
 }
+// adds a listener to the ".wrapper" UL
+card.addClickListener();
 
 // const num_unique_cards = 8;
 // // variable to determine how many card has been opened
