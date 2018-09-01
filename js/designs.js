@@ -52,13 +52,13 @@ class Card {
 
   /*** add a div, with an img as a child, into the DOM */
   setImage() {
+    let myImage = document.createElement("img");
+    myImage.src = "img/" + this.identity + ".svg";
+
     // create the div for the img tag
     let cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
     document.querySelector(".wrapper").appendChild(cardDiv);
-
-    let myImage = document.createElement("img");
-    myImage.src = "img/" + this.identity + ".svg";
 
     cardDiv.appendChild(myImage);
   }
