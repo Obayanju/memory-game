@@ -41,23 +41,29 @@ class Images {
 }
 
 class Card {
-  constructor(identity) {
+  constructor(identity, aClone) {
     this.identity = identity;
+    this.aClone = aClone;
+    this.isOpen = false;
   }
 
   addClickListener() {
-    const cardWrapper = document.querySelector(".wrapper");
-    cardWrapper.addEventListener("click", this.hideOrShow);
+    const card = document.querySelector(".card." + this.identity);
+    card.addEventListener("click", this.hideOrShow);
   }
 
   /*** add a div, with an img as a child, into the DOM */
   setImage() {
     let myImage = document.createElement("img");
-    myImage.src = "img/" + this.identity + ".svg";
+    if (this.aClone) {
+      myImage.src = "img/" + this.identity.slice(0, -5) + ".svg";
+    } else {
+      myImage.src = "img/" + this.identity + ".svg";
+    }
 
     // create the div for the img tag
     let cardDiv = document.createElement("div");
-    cardDiv.classList.add("card");
+    cardDiv.classList.add("card", this.identity);
     document.querySelector(".wrapper").appendChild(cardDiv);
 
     cardDiv.appendChild(myImage);
@@ -69,22 +75,45 @@ class Card {
   hideOrShow() {
     // only respond to click on the card DIV itself
     if (event.target.nodeName != "UL") {
-      console.log("hide or show card");
+      console.log(this);
     }
   }
 
   flip() {}
 }
+
 let images = new Images();
 images.shuffle();
 
 let card;
+let alreadyExistingCards = [];
+let cardExists = false;
+// loop through the 16 card names, and create a card accordingly
 for (let i = 0; i < 16; i++) {
-  card = new Card(images.imagesArray[i]);
-  card.setImage();
+  // Check if we are dealing with a card name that's already been used.
+  // Trying to make sure we don't have the same class names for two cards
+  // with the same image
+  for (let j = 0; j < alreadyExistingCards.length; j++) {
+    if (images.imagesArray[i] == alreadyExistingCards[j]) {
+      cardExists = true;
+    }
+  }
+  // change the card's identity(class name) depending on whether
+  // a card with the same name is already existing
+  if (cardExists) {
+    let identity = images.imagesArray[i] + "clone";
+    card = new Card(identity, true);
+    card.setImage();
+    card.addClickListener();
+    cardExists = false;
+  } else {
+    let identity = images.imagesArray[i];
+    card = new Card(identity, false);
+    card.setImage();
+    card.addClickListener();
+    alreadyExistingCards.push(images.imagesArray[i]);
+  }
 }
-// adds a listener to the ".wrapper" UL
-card.addClickListener();
 
 // const num_unique_cards = 8;
 // // variable to determine how many card has been opened
