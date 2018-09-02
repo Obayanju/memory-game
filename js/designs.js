@@ -76,7 +76,11 @@ class Card {
     let img = document.querySelector(".card." + this.identity + " img");
     img.style.visibility = "visible";
     this.isOpen = true;
+    // make sure user can't click on an already opened card to close it.
+    // cards would only be closed after a wrong or right match
+    cardDiv.style.pointerEvents = "none";
   }
+
   hide() {
     let cardDiv = document.querySelector(".card." + this.identity);
     cardDiv.style.visibility = "visible";
