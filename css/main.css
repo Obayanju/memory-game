@@ -28,6 +28,7 @@ body {
 .wrapper .card {
   background-color: black;
   color: grey;
+  visibility: visible;
 }
 
 .card > img {

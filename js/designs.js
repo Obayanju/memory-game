@@ -49,7 +49,8 @@ class Card {
 
   addClickListener() {
     const card = document.querySelector(".card." + this.identity);
-    card.addEventListener("click", this.hideOrShow);
+    // make sure 'this' is the card object, so we can access the isOpen property
+    card.addEventListener("click", this.hideOrShow.bind(this));
   }
 
   /*** add a div, with an img as a child, into the DOM */
@@ -69,13 +70,29 @@ class Card {
     cardDiv.appendChild(myImage);
   }
 
-  show() {}
-  hide() {}
+  show() {
+    let cardDiv = document.querySelector(".card." + this.identity);
+    cardDiv.style.visibility = "hidden";
+    let img = document.querySelector(".card." + this.identity + " img");
+    img.style.visibility = "visible";
+    this.isOpen = true;
+  }
+  hide() {
+    let cardDiv = document.querySelector(".card." + this.identity);
+    cardDiv.style.visibility = "visible";
+    let img = document.querySelector(".card." + this.identity + " img");
+    img.style.visibility = "hidden";
+    this.isOpen = false;
+  }
 
   hideOrShow() {
     // only respond to click on the card DIV itself
     if (event.target.nodeName != "UL") {
-      console.log(this);
+      if (this.isOpen) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
   }
 
