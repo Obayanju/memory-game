@@ -99,8 +99,6 @@ class Card {
       }
     }
   }
-
-  flip() {}
 }
 
 let images = new Images();
