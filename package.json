@@ -1,0 +1,27 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "Also know as Concentration game, is a game where you flip two random cards and see if they match. You flip the cards until you guess every pair of card correctly.",
+  "main": "designs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Obayanju/memory-game.git"
+  },
+  "author": "Obayanju Damilare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Obayanju/memory-game/issues"
+  },
+  "homepage": "https://github.com/Obayanju/memory-game#readme",
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^17.1.0"
+  }
+}
