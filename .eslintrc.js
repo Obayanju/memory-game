@@ -1,3 +1,10 @@
 module.exports = {
-    "extends": "airbnb-base"
+  extends: ["airbnb-base", "prettier"],
+  rules: {
+    quotes: ["error", "double"]
+  },
+  env: {
+    browser: true,
+    node: true
+  }
 };

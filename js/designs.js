@@ -27,7 +27,7 @@ class Images {
     let randomIndex;
 
     // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
+    while (currentIndex !== 0) {
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -48,22 +48,22 @@ class Card {
   }
 
   addClickListener() {
-    const card = document.querySelector(".card." + this.identity);
+    const card = document.querySelector(`.card.${this.identity}`);
     // make sure 'this' is the card object, so we can access the isOpen property
     card.addEventListener("click", this.hideOrShow.bind(this));
   }
 
-  /*** add a div, with an img as a child, into the DOM */
+  /** add a div, with an img as a child, into the DOM */
   setImage() {
-    let myImage = document.createElement("img");
+    const myImage = document.createElement("img");
     if (this.aClone) {
-      myImage.src = "img/" + this.identity.slice(0, -5) + ".svg";
+      myImage.src = `img/${this.identity.slice(0, -5)}.svg`;
     } else {
-      myImage.src = "img/" + this.identity + ".svg";
+      myImage.src = `img/${this.identity}.svg`;
     }
 
     // create the div for the img tag
-    let cardDiv = document.createElement("div");
+    const cardDiv = document.createElement("div");
     cardDiv.classList.add("card", this.identity);
     document.querySelector(".wrapper").appendChild(cardDiv);
 
@@ -71,9 +71,9 @@ class Card {
   }
 
   show() {
-    let cardDiv = document.querySelector(".card." + this.identity);
+    const cardDiv = document.querySelector(`.card.${this.identity}`);
     cardDiv.style.visibility = "hidden";
-    let img = document.querySelector(".card." + this.identity + " img");
+    const img = document.querySelector(`.card.${this.identity} img`);
     img.style.visibility = "visible";
     this.isOpen = true;
     // make sure user can't click on an already opened card to close it.
@@ -82,16 +82,16 @@ class Card {
   }
 
   hide() {
-    let cardDiv = document.querySelector(".card." + this.identity);
+    const cardDiv = document.querySelector(`.card.${this.identity}`);
     cardDiv.style.visibility = "visible";
-    let img = document.querySelector(".card." + this.identity + " img");
+    const img = document.querySelector(`.card.${this.identity} img`);
     img.style.visibility = "hidden";
     this.isOpen = false;
   }
 
-  hideOrShow() {
+  hideOrShow(e) {
     // only respond to click on the card DIV itself
-    if (event.target.nodeName != "UL") {
+    if (e.target.nodeName !== "UL") {
       if (this.isOpen) {
         this.hide();
       } else {
@@ -101,32 +101,32 @@ class Card {
   }
 }
 
-let images = new Images();
+const images = new Images();
 images.shuffle();
 
 let card;
-let alreadyExistingCards = [];
+const alreadyExistingCards = [];
 let cardExists = false;
 // loop through the 16 card names, and create a card accordingly
-for (let i = 0; i < 16; i++) {
+for (let i = 0; i < 16; i += 1) {
   // Check if we are dealing with a card name that's already been used.
   // Trying to make sure we don't have the same class names for two cards
   // with the same image
-  for (let j = 0; j < alreadyExistingCards.length; j++) {
-    if (images.imagesArray[i] == alreadyExistingCards[j]) {
+  for (let j = 0; j < alreadyExistingCards.length; j += 1) {
+    if (images.imagesArray[i] === alreadyExistingCards[j]) {
       cardExists = true;
     }
   }
   // change the card's identity(class name) depending on whether
   // a card with the same name is already existing
   if (cardExists) {
-    let identity = images.imagesArray[i] + "clone";
+    const identity = `${images.imagesArray[i]}clone`;
     card = new Card(identity, true);
     card.setImage();
     card.addClickListener();
     cardExists = false;
   } else {
-    let identity = images.imagesArray[i];
+    const identity = images.imagesArray[i];
     card = new Card(identity, false);
     card.setImage();
     card.addClickListener();

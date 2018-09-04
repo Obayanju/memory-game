@@ -4,7 +4,8 @@
   "description": "Also know as Concentration game, is a game where you flip two random cards and see if they match. You flip the cards until you guess every pair of card correctly.",
   "main": "designs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,9 @@
   "devDependencies": {
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "prettier-eslint": "^8.8.2"
   },
   "dependencies": {
     "eslint-config-airbnb": "^17.1.0"
