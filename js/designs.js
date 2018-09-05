@@ -40,6 +40,45 @@ class Images {
   }
 }
 
+class AllCards {
+  constructor() {
+    this.allCards = [];
+    this.openedCard = [];
+  }
+
+  add(card) {
+    this.allCards.push(card);
+  }
+
+  // do something when two cards are opened
+  addTwoCardsOpenListener(card) {
+    const cardElement = card.getCardElement();
+    cardElement.addEventListener("click", this.isTwoCardsOpened.bind(this));
+  }
+
+  isTwoCardsOpened() {
+    for (let i = 0; i < this.allCards.length; i += 1) {
+      if (this.allCards[i].isOpen) {
+        // console.log(this.allCards[i]);
+        this.openedCard.push(this.allCards[i]);
+        console.log(this.openedCard);
+      }
+    }
+    if (this.openedCard.length === 2) {
+      console.log("two cards are open");
+      this.openedCard[0].hide();
+      this.openedCard[1].hide();
+      this.openedCard = [];
+    } else {
+      this.openedCard = [];
+    }
+  }
+
+  returnAllCards() {
+    return this.allCards;
+  }
+}
+
 class Card {
   constructor(identity, aClone) {
     this.identity = identity;
@@ -48,9 +87,13 @@ class Card {
   }
 
   addClickListener() {
-    const card = document.querySelector(`.card.${this.identity}`);
+    const card = this.getCardElement();
     // make sure 'this' is the card object, so we can access the isOpen property
     card.addEventListener("click", this.hideOrShow.bind(this));
+  }
+
+  getCardElement() {
+    return document.querySelector(`.card.${this.identity}`);
   }
 
   /** add a div, with an img as a child, into the DOM */
@@ -99,12 +142,17 @@ class Card {
       }
     }
   }
+
+  disableClick() {}
+
+  enableClick() {}
 }
 
 const images = new Images();
 images.shuffle();
 
 let card;
+const cardDeck = new AllCards();
 const alreadyExistingCards = [];
 let cardExists = false;
 // loop through the 16 card names, and create a card accordingly
@@ -124,12 +172,16 @@ for (let i = 0; i < 16; i += 1) {
     card = new Card(identity, true);
     card.setImage();
     card.addClickListener();
+    cardDeck.add(card);
+    cardDeck.addTwoCardsOpenListener(card);
     cardExists = false;
   } else {
     const identity = images.imagesArray[i];
     card = new Card(identity, false);
     card.setImage();
     card.addClickListener();
+    cardDeck.add(card);
+    cardDeck.addTwoCardsOpenListener(card);
     alreadyExistingCards.push(images.imagesArray[i]);
   }
 }
