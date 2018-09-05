@@ -114,22 +114,23 @@ class Card {
   }
 
   show() {
-    const cardDiv = document.querySelector(`.card.${this.identity}`);
+    const cardDiv = this.getCardElement();
     cardDiv.style.visibility = "hidden";
     const img = document.querySelector(`.card.${this.identity} img`);
     img.style.visibility = "visible";
     this.isOpen = true;
     // make sure user can't click on an already opened card to close it.
     // cards would only be closed after a wrong or right match
-    cardDiv.style.pointerEvents = "none";
+    this.disableClick();
   }
 
   hide() {
-    const cardDiv = document.querySelector(`.card.${this.identity}`);
+    const cardDiv = this.getCardElement();
     cardDiv.style.visibility = "visible";
     const img = document.querySelector(`.card.${this.identity} img`);
     img.style.visibility = "hidden";
     this.isOpen = false;
+    this.enableClick();
   }
 
   hideOrShow(e) {
@@ -143,9 +144,13 @@ class Card {
     }
   }
 
-  disableClick() {}
+  disableClick() {
+    this.getCardElement().style.pointerEvents = "none";
+  }
 
-  enableClick() {}
+  enableClick() {
+    this.getCardElement().style.pointerEvents = "auto";
+  }
 }
 
 const images = new Images();
