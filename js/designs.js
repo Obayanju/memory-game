@@ -80,6 +80,11 @@ class AllCards {
   }
 }
 
+const images = new Images();
+images.shuffle();
+let card;
+const cardDeck = new AllCards();
+
 class Card {
   constructor(identity, aClone) {
     this.identity = identity;
@@ -88,9 +93,9 @@ class Card {
   }
 
   addClickListener() {
-    const card = this.getCardElement();
+    const myCard = this.getCardElement();
     // make sure 'this' is the card object, so we can access the isOpen property
-    card.addEventListener("click", this.hideOrShow.bind(this));
+    myCard.addEventListener("click", this.hideOrShow.bind(this));
   }
 
   getCardElement() {
@@ -139,8 +144,10 @@ class Card {
     if (e.target.nodeName !== "UL") {
       if (this.isOpen) {
         this.hide();
-      } else {
+      } else if (cardDeck.openedCard.length === 0) {
         this.show();
+        // do something if two cards are opened
+        cardDeck.isTwoCardsOpened();
       }
     }
   }
@@ -154,11 +161,6 @@ class Card {
   }
 }
 
-const images = new Images();
-images.shuffle();
-
-let card;
-const cardDeck = new AllCards();
 const alreadyExistingCards = [];
 let cardExists = false;
 // loop through the 16 card names, and create a card accordingly
@@ -179,7 +181,7 @@ for (let i = 0; i < 16; i += 1) {
     card.setImage();
     card.addClickListener();
     cardDeck.add(card);
-    cardDeck.addTwoCardsOpenListener(card);
+    // cardDeck.addTwoCardsOpenListener(card);
     cardExists = false;
   } else {
     const identity = images.imagesArray[i];
@@ -187,7 +189,7 @@ for (let i = 0; i < 16; i += 1) {
     card.setImage();
     card.addClickListener();
     cardDeck.add(card);
-    cardDeck.addTwoCardsOpenListener(card);
+    // cardDeck.addTwoCardsOpenListener(card);
     alreadyExistingCards.push(images.imagesArray[i]);
   }
 }
