@@ -56,19 +56,20 @@ class AllCards {
     cardElement.addEventListener("click", this.isTwoCardsOpened.bind(this));
   }
 
+  closeTwoCards() {
+    this.openedCard[0].hide();
+    this.openedCard[1].hide();
+    this.openedCard = [];
+  }
+
   isTwoCardsOpened() {
     for (let i = 0; i < this.allCards.length; i += 1) {
       if (this.allCards[i].isOpen) {
-        // console.log(this.allCards[i]);
         this.openedCard.push(this.allCards[i]);
-        console.log(this.openedCard);
       }
     }
     if (this.openedCard.length === 2) {
-      console.log("two cards are open");
-      this.openedCard[0].hide();
-      this.openedCard[1].hide();
-      this.openedCard = [];
+      setTimeout(this.closeTwoCards.bind(this), 500);
     } else {
       this.openedCard = [];
     }
