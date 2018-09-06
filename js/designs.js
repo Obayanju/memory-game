@@ -40,6 +40,24 @@ class Images {
   }
 }
 
+class GameLogic {
+  static isSameImage(card1, card2) {
+    // card1 and card2 are objects, but we need the element
+    const card1Element = document.querySelector(`.card.${card1.identity}`);
+    const card2Element = document.querySelector(`.card.${card2.identity}`);
+    // get the image element so we can access the src attribute value
+    const card1ElementImage = card1Element.querySelector("img");
+    const card2ElementImage = card2Element.querySelector("img");
+
+    const img1 = card1ElementImage.getAttribute("src");
+    const img2 = card2ElementImage.getAttribute("src");
+    if (img1 === img2) {
+      return true;
+    }
+    return false;
+  }
+}
+
 class AllCards {
   constructor() {
     this.allCards = [];
@@ -69,7 +87,13 @@ class AllCards {
       }
     }
     if (this.openedCard.length === 2) {
-      setTimeout(this.closeTwoCards.bind(this), 500);
+      // its a correct guess if the images are the same
+      if (GameLogic.isSameImage(this.openedCard[0], this.openedCard[1])) {
+        // leave the cards open
+      } else {
+        // close the cards
+        setTimeout(this.closeTwoCards.bind(this), 500);
+      }
     } else {
       this.openedCard = [];
     }
@@ -372,7 +396,7 @@ for (let i = 0; i < 16; i += 1) {
 //   }
 
 //   card_open -= 1;
-//   // console.log(card_open);
+// console.log(card_open);
 // }
 
 // function correctGuess(card1, card2) {
