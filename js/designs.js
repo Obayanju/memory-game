@@ -41,10 +41,18 @@ class Images {
 }
 
 class GameLogic {
-  static isSameImage(card1, card2) {
+  constructor() {
+    this.moves = 0;
+    this.correctGuess = 0;
+    this.card1 = null;
+    this.card2 = null;
+  }
+
+  isSameImage(card1, card2) {
+    [this.card1, this.card2] = [card1, card2];
     // card1 and card2 are objects, but we need the element
-    const card1Element = document.querySelector(`.card.${card1.identity}`);
-    const card2Element = document.querySelector(`.card.${card2.identity}`);
+    const card1Element = document.querySelector(`.card.${this.card1.identity}`);
+    const card2Element = document.querySelector(`.card.${this.card2.identity}`);
     // get the image element so we can access the src attribute value
     const card1ElementImage = card1Element.querySelector("img");
     const card2ElementImage = card2Element.querySelector("img");
@@ -56,10 +64,40 @@ class GameLogic {
     }
     return false;
   }
+
+  updateMovesText() {
+    document.querySelector("span#moves").innerHTML = this.moves;
+  }
+
+  timer() {}
+
+  static gameisWon() {
+    // const message =
+    //   "You have won the game!\nIt took you " +
+    //   seconds_elapsed +
+    //   " seconds, " +
+    //   moves +
+    //   " moves, and " +
+    //   stars +
+    //   " stars\nPlay Again?";
+    // const response = window.confirm(message);
+    // console.log(response);
+    // if (response) {
+    //   restartGame();
+    // } else {
+    //   // user does not want to play again
+    //   clearInterval(intervalID);
+    // }
+  }
+
+  restartGame() {}
+
+  starRating() {}
 }
 
-class AllCards {
+class AllCards extends GameLogic {
   constructor() {
+    super();
     this.allCards = [];
     this.openedCards = [];
   }
@@ -71,7 +109,7 @@ class AllCards {
   // do something when two cards are opened
   addTwoCardsOpenListener(card) {
     const cardElement = card.getCardElement();
-    cardElement.addEventListener("click", this.isTwoCardsOpened.bind(this));
+    cardElement.addEventListener("click", this.checkCorrectGuess.bind(this));
   }
 
   closeTwoCards() {
@@ -80,7 +118,7 @@ class AllCards {
     this.openedCards = [];
   }
 
-  isTwoCardsOpened() {
+  checkCorrectGuess() {
     for (let i = 0; i < this.allCards.length; i += 1) {
       if (this.allCards[i].isOpen) {
         if (this.allCards[i] !== this.openedCards[0]) {
@@ -89,15 +127,23 @@ class AllCards {
       }
     }
     if (this.openedCards.length === 2) {
-      // its a correct guess if the images are the same
-      if (GameLogic.isSameImage(this.openedCards[0], this.openedCards[1])) {
+      if (this.isSameImage(this.openedCards[0], this.openedCards[1])) {
+        // a correct guess
+        this.correctGuess += 1;
+        this.moves += 1;
+        this.updateMovesText();
         // leave the cards physically open(isOpen is set to false because we
         // don't want to interact with the cards in the future when looking
         // for cards that are open)
         this.openedCards[0].isOpen = false;
         this.openedCards[1].isOpen = false;
         this.openedCards = [];
+        if (this.correctGuess === this.allCards.length / 2) {
+          // game is won
+        }
       } else {
+        this.moves += 1;
+        this.updateMovesText();
         // close the cards
         setTimeout(this.closeTwoCards.bind(this), 500);
       }
@@ -176,7 +222,7 @@ class Card {
       } else if (cardDeck.openedCards.length < 2) {
         this.show();
         // If two cards are opened, check if its a correct guess
-        cardDeck.isTwoCardsOpened();
+        cardDeck.checkCorrectGuess();
       }
     }
   }
