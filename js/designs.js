@@ -83,19 +83,32 @@ class AllCards {
   isTwoCardsOpened() {
     for (let i = 0; i < this.allCards.length; i += 1) {
       if (this.allCards[i].isOpen) {
-        this.openedCard.push(this.allCards[i]);
+        if (this.allCards[i] !== this.openedCard[0]) {
+          this.openedCard.push(this.allCards[i]);
+          console.log(`Pushed -> ${this.allCards[i]}`);
+        }
       }
     }
+    console.log(
+      `openedCard length in isTwoCardsOpened scope is ${this.openedCard.length}`
+    );
     if (this.openedCard.length === 2) {
       // its a correct guess if the images are the same
       if (GameLogic.isSameImage(this.openedCard[0], this.openedCard[1])) {
-        // leave the cards open
+        console.log("Image is the same");
+        // leave the cards physically open(isOpen is set to false because we
+        // don't want to interact with the cards in the future when looking
+        // for cards that are open)
+        this.openedCard[0].isOpen = false;
+        this.openedCard[1].isOpen = false;
+        this.openedCard = [];
       } else {
         // close the cards
+        console.log("Close the cards");
         setTimeout(this.closeTwoCards.bind(this), 500);
       }
     } else {
-      this.openedCard = [];
+      // this.openedCard = [];
     }
   }
 
@@ -166,9 +179,13 @@ class Card {
   hideOrShow(e) {
     // only respond to click on the card DIV itself
     if (e.target.nodeName !== "UL") {
+      console.log(
+        `openedCard length in hideOrShow scope is ${cardDeck.openedCard.length}`
+      );
       if (this.isOpen) {
         this.hide();
-      } else if (cardDeck.openedCard.length === 0) {
+      } else if (cardDeck.openedCard.length < 2) {
+        console.log(cardDeck.openedCard.length);
         this.show();
         // do something if two cards are opened
         cardDeck.isTwoCardsOpened();
