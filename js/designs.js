@@ -46,6 +46,13 @@ class GameLogic {
     this.correctGuess = 0;
     this.card1 = null;
     this.card2 = null;
+    this.secondsElapsed = 0;
+    this.timerStarted = false;
+    this.intervalID = null;
+  }
+
+  updateMovesText() {
+    document.querySelector("span#moves").innerHTML = this.moves;
   }
 
   isSameImage(card1, card2) {
@@ -65,11 +72,31 @@ class GameLogic {
     return false;
   }
 
-  updateMovesText() {
-    document.querySelector("span#moves").innerHTML = this.moves;
+  timer() {
+    if (!this.timerStarted) {
+      const start = Date.now();
+      // check every 10 millisecond, how many seconds has passed
+      this.intervalID = setInterval(function updateTimer() {
+        document.querySelector("span#timer").innerHTML = this.secondsElapsed;
+        // how many milliseconds has elapsed since start
+        const delta = Date.now() - start;
+        // convert to seconds
+        this.secondsElapsed = Math.floor(delta / 1000);
+      }, 10);
+      this.timerStarted = true;
+    }
   }
 
-  timer() {}
+  startTimerWhenCardIsClicked() {
+    const wrapper = document.querySelector(".wrapper");
+    wrapper.addEventListener("click", this.timer.bind(this));
+  }
+
+  endTimer() {
+    clearInterval(this.intervalID);
+    this.secondsElapsed = 0;
+    document.querySelector("span#timer").innerHTML = this.secondsElapsed;
+  }
 
   static gameisWon() {
     // const message =
@@ -140,6 +167,7 @@ class AllCards extends GameLogic {
         this.openedCards = [];
         if (this.correctGuess === this.allCards.length / 2) {
           // game is won
+          this.endTimer();
         }
       } else {
         this.moves += 1;
@@ -159,6 +187,7 @@ const images = new Images();
 images.shuffle();
 let card;
 const cardDeck = new AllCards();
+cardDeck.startTimerWhenCardIsClicked();
 
 class Card {
   constructor(identity, aClone) {
