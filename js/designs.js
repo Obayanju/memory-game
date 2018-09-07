@@ -44,6 +44,7 @@ class GameLogic {
   constructor() {
     this.moves = 0;
     this.correctGuess = 0;
+    this.stars = 3;
     this.card1 = null;
     this.card2 = null;
     this.secondsElapsed = 0;
@@ -119,7 +120,17 @@ class GameLogic {
 
   restartGame() {}
 
-  starRating() {}
+  starRating() {
+    if (this.moves === 8) {
+      const star = document.querySelector("#star3");
+      star.style.visibility = "hidden";
+      this.stars -= 1;
+    } else if (this.moves === 12) {
+      const star = document.querySelector("#star2");
+      star.style.visibility = "hidden";
+      this.stars -= 1;
+    }
+  }
 }
 
 class AllCards extends GameLogic {
@@ -159,6 +170,8 @@ class AllCards extends GameLogic {
         this.correctGuess += 1;
         this.moves += 1;
         this.updateMovesText();
+        // check star rating after a move
+        this.starRating();
         // leave the cards physically open(isOpen is set to false because we
         // don't want to interact with the cards in the future when looking
         // for cards that are open)
@@ -172,6 +185,8 @@ class AllCards extends GameLogic {
       } else {
         this.moves += 1;
         this.updateMovesText();
+        // check star rating after a move
+        this.starRating();
         // close the cards
         setTimeout(this.closeTwoCards.bind(this), 500);
       }
