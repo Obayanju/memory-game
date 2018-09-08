@@ -95,8 +95,6 @@ class GameLogic {
 
   endTimer() {
     clearInterval(this.intervalID);
-    this.secondsElapsed = 0;
-    document.querySelector("span#timer").innerHTML = this.secondsElapsed;
   }
 
   gameisWon() {
