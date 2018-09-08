@@ -98,13 +98,11 @@ class GameLogic {
   }
 
   gameisWon() {
-    console.log(this);
     const message = `You have won the game!\nIt took you ${
       this.secondsElapsed
     } seconds, ${this.moves} moves, and ${this.stars} stars\nPlay Again?`;
     this.endTimer();
     const response = window.confirm(message);
-    console.log(response);
     if (response) {
       // restartGame();
     } else {
