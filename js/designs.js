@@ -138,12 +138,6 @@ class AllCards extends GameLogic {
     this.allCards.push(card);
   }
 
-  // do something when two cards are opened
-  addTwoCardsOpenListener(card) {
-    const cardElement = card.getCardElement();
-    cardElement.addEventListener("click", this.checkCorrectGuess.bind(this));
-  }
-
   closeTwoCards() {
     this.openedCards[0].hide();
     this.openedCards[1].hide();
