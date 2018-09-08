@@ -90,7 +90,7 @@ class GameLogic {
 
   startTimerWhenCardIsClicked() {
     const wrapper = document.querySelector(".wrapper");
-    wrapper.addEventListener("click", this.timer.bind(this));
+    wrapper.addEventListener("click", () => this.timer());
   }
 
   endTimer() {
@@ -182,7 +182,7 @@ class AllCards extends GameLogic {
         // check star rating after a move
         this.starRating();
         // close the cards
-        setTimeout(this.closeTwoCards.bind(this), 500);
+        setTimeout(() => this.closeTwoCards(), 500);
       }
     }
   }
@@ -208,7 +208,7 @@ class Card {
   addClickListener() {
     const myCard = this.getCardElement();
     // make sure 'this' is the card object, so we can access the isOpen property
-    myCard.addEventListener("click", this.hideOrShow.bind(this));
+    myCard.addEventListener("click", event => this.hideOrShow(event));
   }
 
   getCardElement() {
