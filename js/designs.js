@@ -77,7 +77,7 @@ class GameLogic {
     if (!this.timerStarted) {
       const start = Date.now();
       // check every 10 millisecond, how many seconds has passed
-      this.intervalID = setInterval(function updateTimer() {
+      this.intervalID = setInterval(() => {
         document.querySelector("span#timer").innerHTML = this.secondsElapsed;
         // how many milliseconds has elapsed since start
         const delta = Date.now() - start;
@@ -99,23 +99,19 @@ class GameLogic {
     document.querySelector("span#timer").innerHTML = this.secondsElapsed;
   }
 
-  static gameisWon() {
-    // const message =
-    //   "You have won the game!\nIt took you " +
-    //   seconds_elapsed +
-    //   " seconds, " +
-    //   moves +
-    //   " moves, and " +
-    //   stars +
-    //   " stars\nPlay Again?";
-    // const response = window.confirm(message);
-    // console.log(response);
-    // if (response) {
-    //   restartGame();
-    // } else {
-    //   // user does not want to play again
-    //   clearInterval(intervalID);
-    // }
+  gameisWon() {
+    console.log(this);
+    const message = `You have won the game!\nIt took you ${
+      this.secondsElapsed
+    } seconds, ${this.moves} moves, and ${this.stars} stars\nPlay Again?`;
+    this.endTimer();
+    const response = window.confirm(message);
+    console.log(response);
+    if (response) {
+      // restartGame();
+    } else {
+      // user does not want to play again
+    }
   }
 
   restartGame() {}
@@ -180,7 +176,7 @@ class AllCards extends GameLogic {
         this.openedCards = [];
         if (this.correctGuess === this.allCards.length / 2) {
           // game is won
-          this.endTimer();
+          this.gameisWon();
         }
       } else {
         this.moves += 1;
