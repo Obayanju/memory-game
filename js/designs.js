@@ -40,6 +40,8 @@ class Images {
   }
 }
 
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["resetCards"] }] */
+
 class GameLogic {
   constructor() {
     this.moves = 0;
@@ -136,11 +138,21 @@ class GameLogic {
     this.stars = 3;
   }
 
+  resetCards() {
+    document.querySelectorAll(".card").forEach(card => {
+      card.style.visibility = "visible";
+      card.style.pointerEvents = "auto";
+    });
+    document.querySelectorAll(".card img").forEach(image => {
+      image.style.visibility = "hidden";
+    });
+  }
+
   restartGame() {
     this.resetTimer();
     this.resetMoves();
     this.resetStars();
-    this.reserCards();
+    this.resetCards();
   }
 
   starRating() {
