@@ -77,6 +77,10 @@ class GameLogic {
     document.querySelector("span#timer").innerHTML = this.secondsElapsed;
   }
 
+  setMovesHTML() {
+    document.querySelector("span#moves").innerHTML = this.moves;
+  }
+
   timer() {
     if (!this.timerStarted) {
       const start = Date.now();
@@ -117,6 +121,19 @@ class GameLogic {
   resetTimer() {
     this.secondsElapsed = 0;
     this.setTimersHTML();
+  }
+
+  resetMoves() {
+    this.moves = 0;
+    this.setMovesHTML();
+  }
+
+  /* eslint no-param-reassign: ["error", { "props": false }] */
+  resetStars() {
+    document.querySelectorAll(".star").forEach(star => {
+      star.style.visibility = "visible";
+    });
+    this.stars = 3;
   }
 
   restartGame() {
