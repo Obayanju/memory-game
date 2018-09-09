@@ -52,6 +52,7 @@ class GameLogic {
     this.secondsElapsed = 0;
     this.timerStarted = false;
     this.intervalID = null;
+    this.isFirstCardClicked = false;
   }
 
   updateMovesText() {
@@ -98,13 +99,19 @@ class GameLogic {
     }
   }
 
+  // timer is started when the user clicks on a card the first time
   startTimerWhenCardIsClicked() {
-    const wrapper = document.querySelector(".wrapper");
-    wrapper.addEventListener("click", () => this.timer());
+    if (!this.isFirstCardClicked) {
+      this.timer();
+      this.isFirstCardClicked = true;
+    }
+    // const wrapper = document.querySelector(".wrapper");
+    // wrapper.addEventListener("click", () => this.timer(), { once: "true" });
   }
 
   endTimer() {
     clearInterval(this.intervalID);
+    this.timerStarted = false;
   }
 
   gameisWon() {
@@ -123,6 +130,8 @@ class GameLogic {
   resetTimer() {
     this.secondsElapsed = 0;
     this.setTimersHTML();
+    this.isFirstCardClicked = false;
+    // this.startTimerWhenCardIsClicked();
   }
 
   resetMoves() {
@@ -149,10 +158,12 @@ class GameLogic {
   }
 
   restartGame() {
-    this.resetTimer();
+    console.log(this.correctGuess);
+    this.correctGuess = 0;
     this.resetMoves();
     this.resetStars();
     this.resetCards();
+    this.resetTimer();
   }
 
   starRating() {
@@ -231,7 +242,6 @@ const images = new Images();
 images.shuffle();
 let card;
 const cardDeck = new AllCards();
-cardDeck.startTimerWhenCardIsClicked();
 
 class Card {
   constructor(identity, aClone) {
@@ -268,6 +278,7 @@ class Card {
   }
 
   show() {
+    cardDeck.startTimerWhenCardIsClicked();
     const cardDiv = this.getCardElement();
     cardDiv.style.visibility = "hidden";
     const img = document.querySelector(`.card.${this.identity} img`);
