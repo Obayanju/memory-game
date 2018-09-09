@@ -115,9 +115,12 @@ class GameLogic {
   }
 
   gameisWon() {
+    const starsPlural = this.stars > 1 ? "stars" : "star";
     const message = `You have won the game!\nIt took you ${
       this.secondsElapsed
-    } seconds, ${this.moves} moves, and ${this.stars} stars\nPlay Again?`;
+    } seconds, ${this.moves} moves, and ${
+      this.stars
+    } ${starsPlural}\nPlay Again?`;
     this.endTimer();
     const response = window.confirm(message);
     if (response) {
@@ -158,7 +161,6 @@ class GameLogic {
   }
 
   restartGame() {
-    console.log(this.correctGuess);
     this.correctGuess = 0;
     this.resetMoves();
     this.resetStars();
