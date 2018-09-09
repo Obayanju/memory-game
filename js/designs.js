@@ -73,12 +73,16 @@ class GameLogic {
     return false;
   }
 
+  setTimersHTML() {
+    document.querySelector("span#timer").innerHTML = this.secondsElapsed;
+  }
+
   timer() {
     if (!this.timerStarted) {
       const start = Date.now();
       // check every 10 millisecond, how many seconds has passed
       this.intervalID = setInterval(() => {
-        document.querySelector("span#timer").innerHTML = this.secondsElapsed;
+        this.setTimersHTML();
         // how many milliseconds has elapsed since start
         const delta = Date.now() - start;
         // convert to seconds
@@ -104,13 +108,23 @@ class GameLogic {
     this.endTimer();
     const response = window.confirm(message);
     if (response) {
-      // restartGame();
+      this.restartGame();
     } else {
       // user does not want to play again
     }
   }
 
-  restartGame() {}
+  resetTimer() {
+    this.secondsElapsed = 0;
+    this.setTimersHTML();
+  }
+
+  restartGame() {
+    this.resetTimer();
+    this.resetMoves();
+    this.resetStars();
+    this.reserCards();
+  }
 
   starRating() {
     if (this.moves === 8) {
