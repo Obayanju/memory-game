@@ -121,6 +121,7 @@ class GameLogic {
     } seconds, ${this.moves} moves, and ${
       this.stars
     } ${starsPlural}\nPlay Again?`;
+    // end the timer before the modal pops up
     this.endTimer();
     // const response = window.confirm(message);
     swal({
@@ -168,6 +169,7 @@ class GameLogic {
   }
 
   restartGame() {
+    this.endTimer();
     this.correctGuess = 0;
     this.resetMoves();
     this.resetStars();
@@ -197,6 +199,11 @@ class AllCards extends GameLogic {
 
   add(card) {
     this.allCards.push(card);
+  }
+
+  reset() {
+    const resetButton = document.querySelector("#restart");
+    resetButton.addEventListener("click", () => this.restartGame());
   }
 
   closeTwoCards() {
@@ -251,6 +258,8 @@ const images = new Images();
 images.shuffle();
 let card;
 const cardDeck = new AllCards();
+
+document.addEventListener("DOMContentLoaded", () => cardDeck.reset());
 
 class Card {
   constructor(identity, aClone) {
