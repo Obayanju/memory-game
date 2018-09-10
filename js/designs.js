@@ -122,12 +122,19 @@ class GameLogic {
       this.stars
     } ${starsPlural}\nPlay Again?`;
     this.endTimer();
-    const response = window.confirm(message);
-    if (response) {
-      this.restartGame();
-    } else {
-      // user does not want to play again
-    }
+    // const response = window.confirm(message);
+    swal({
+      title: "Well Done 🎉",
+      text: message,
+      icon: "success",
+      buttons: ["No, I'm good", "Yesss!"]
+    }).then(response => {
+      if (response) {
+        this.restartGame();
+      } else {
+        swal("Thanks for playing 😊");
+      }
+    });
   }
 
   resetTimer() {
