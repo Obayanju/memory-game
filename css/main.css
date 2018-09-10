@@ -53,6 +53,11 @@ body {
   grid-column-start: 1;
 }
 
+.footer {
+  width: fit-content;
+  margin: 0 auto;
+}
+
 /* -------- Responsive Design Section ----------- */
 @media screen and (max-width: 330px) {
   .wrapper {
